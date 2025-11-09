@@ -2,514 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Them_is_tattooer – Tattoo Artist / Pentester</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Online CV and portfolio of Them_is_tattooer, Tattoo Artist/Video editor/Social Media Content Creator." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Them_is_tattooer</title>
+
   <style>
-    :root {
-      --bg: #020817;
-      --bg-elevated: #050b21;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.12);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border-subtle: rgba(148,163,253,0.16);
-      --radius-xl: 22px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 18px 60px rgba(15,23,42,0.45);
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    /* ====== ΒΑΣΙΚΟ ΣΤΥΛ ====== */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+      line-height: 1.6;
       scroll-behavior: smooth;
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: var(--font-sans);
-      background: radial-gradient(circle at top, #111827 0, #020817 38%, #000 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
+    header {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
     }
 
-    .shell {
-      max-width: 1100px;
+    header h1 {
+      font-size: 3rem;
+      color: #ff0066;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .section {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 24px 18px 40px;
+      padding: 60px 20px;
     }
 
-    /* Top nav */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.06), transparent)
-                  ,rgba(2,6,23,0.96);
-      margin: -8px -4px 24px;
-      padding: 10px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-subtle);
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
-    .nav-title {
-      font-size: 0.9rem;
-      color: var(--muted);
+    .gallery img,
+    .gallery video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ff0066;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 12px;
-      font-size: 0.8rem;
-      flex-wrap: wrap;
+    .gallery img:hover,
+    .gallery video:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff66a3;
     }
 
-    .nav-links a {
-      padding: 6px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #111;
+    }
+
+    .insta-link {
+      color: #ff0066;
       text-decoration: none;
-      color: var(--muted);
-      transition: 0.18s ease;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: color 0.3s;
     }
 
-    .nav-links a:hover {
-      color: var(--accent);
-      border-color: var(--accent-soft);
-      background: rgba(15,23,42,0.9);
+    .insta-link:hover {
+      color: #ff66a3;
     }
 
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 2.3fr) minmax(220px, 1.5fr);
-      gap: 26px;
-      align-items: center;
-      margin-bottom: 26px;
+    /* Glow animation for artistic touch */
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ff0066; }
+      50% { text-shadow: 0 0 20px #ff3399; }
+      100% { text-shadow: 0 0 5px #ff0066; }
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .hero h1 {
-      margin: 10px 0 4px;
-      font-size: clamp(1.9rem, 3vw, 2.4rem);
-      font-weight: 600;
-    }
-
-    .hero-role {
-      font-size: 1rem;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    .hero-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 32rem;
-    }
-
-    .hero-actions {
-      margin-top: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 0.8rem;
-    }
-
-    .btn {
-      border-radius: var(--radius-pill);
-      padding: 7px 15px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s ease;
-      background: transparent;
-    }
-
-    .btn.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #020817;
-      font-weight: 500;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 7px 24px rgba(15,23,42,0.7);
-      background: #0f172a;
-      color: var(--accent);
-    }
-
-    .btn.primary:hover {
-      background: #e5e7eb;
-      color: #020817;
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at top, rgba(56,189,248,0.06), transparent),
-                  var(--bg-elevated);
-      padding: 16px 16px 14px;
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-subtle);
-      display: grid;
-      gap: 6px;
-      font-size: 0.76rem;
-    }
-
-    .hero-label {
-      color: var(--muted);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .pill {
-      display: inline-flex;
-      padding: 3px 9px;
-      margin: 3px 4px 0 0;
-      border-radius: var(--radius-pill);
-      background: rgba(15,23,42,0.96);
-      border: 1px solid rgba(148,163,253,0.22);
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .metrics {
-      display: flex;
-      gap: 18px;
-      margin-top: 4px;
-      flex-wrap: wrap;
-    }
-
-    .metric span:first-child {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--accent);
-    }
-
-    .metric span:last-child {
-      font-size: 0.65rem;
-      color: var(--muted);
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 26px;
-    }
-
-    h2 {
-      font-size: 0.9rem;
-      margin: 0 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    .section-card {
-      background: rgba(5,10,25,0.98);
-      border-radius: var(--radius-xl);
-      padding: 14px 14px 12px;
-      border: 1px solid rgba(75,85,99,0.55);
-      box-shadow: 0 12px 40px rgba(2,6,23,0.95);
-    }
-
-    /* Experience */
-    .timeline {
-      border-left: 1px solid rgba(75,85,99,0.7);
-      padding-left: 14px;
-      display: grid;
-      gap: 10px;
-      font-size: 0.78rem;
-    }
-
-    .role {
-      position: relative;
-    }
-
-    .role::before {
-      content: "";
-      position: absolute;
-      left: -16px;
-      top: 4px;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-    }
-
-    .role-title {
-      font-weight: 500;
-      color: #e5e7ff;
-    }
-
-    .role-meta {
-      color: var(--muted);
-      font-size: 0.7rem;
-      margin-bottom: 4px;
-    }
-
-    .role ul {
-      margin: 0 0 2px;
-      padding-left: 16px;
-      color: var(--muted);
-    }
-
-    .role ul li {
-      margin-bottom: 2px;
-    }
-
-    /* Projects */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-      font-size: 0.76rem;
-    }
-
-    .project {
-      border-radius: 16px;
-      padding: 8px 8px 7px;
-      background: radial-gradient(circle at top, rgba(56,189,248,0.04), transparent),
-                  #020817;
-      border: 1px solid rgba(75,85,99,0.8);
-      display: grid;
-      gap: 3px;
-    }
-
-    .project-title {
-      font-weight: 500;
-      color: var(--accent);
-    }
-
-    .project-meta {
-      color: var(--muted);
-      font-size: 0.68rem;
-    }
-
-    .project a {
-      text-decoration: none;
-      color: var(--accent);
-      font-size: 0.7rem;
-    }
-
-    /* Education & contact */
-    .edu-item {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .contact-links a {
-      display: inline-flex;
-      margin: 2px 10px 2px 0;
-      font-size: 0.78rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .contact-links a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 830px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .projects {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-    }
-
-    @media (max-width: 540px) {
-      .projects {
-        grid-template-columns: 1fr;
-      }
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
+    header h1 {
+      animation: glow 2s infinite alternate;
     }
   </style>
 </head>
+
 <body>
-  <div class="shell">
-    <header class="nav">
-      <div class="nav-title">Your Name</div>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+  <header>
+    <h1>Them_is_tattooer</h1>
+    <p>Tattoo Artist | Video Editor | Social Media Creator</p>
+  </header>
 
-    <section class="hero" id="about">
-      <div>
-        <div class="badge">Open to opportunities</div>
-        <h1>Your Name</h1>
-        <div class="hero-role">Security Engineer · Penetration Tester</div>
-        <p class="hero-text">
-          Short, sharp summary: who you are, years of experience, specialties (web app testing, infra, Dockerized tooling, automation), and the kind of problems you like solving.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#contact">Contact me</a>
-          <a class="btn" href="Your_CV.pdf" target="_blank" rel="noopener">Download PDF CV</a>
-          <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
+  <section class="section">
+    <h2>My Work</h2>
+    <div class="gallery">
+      <!-- ΒΑΛΕ ΕΔΩ ΤΙΣ ΦΩΤΟΓΡΑΦΙΕΣ ΣΟΥ -->
+      <img src="photos/tattoo1.jpg" alt="Tattoo design 1">
+      <img src="photos/tattoo2.jpg" alt="Tattoo design 2">
+      <video controls>
+        <source src="videos/project1.mp4" type="video/mp4">
+      </video>
+      <img src="photos/tattoo3.jpg" alt="Tattoo design 3">
+    </div>
+  </section>
 
-      <aside class="hero-card">
-        <div>
-          <div class="hero-label">Key skills</div>
-          <div>
-            <span class="pill">Penetration Testing</span>
-            <span class="pill">Web & API Security</span>
-            <span class="pill">Network Recon</span>
-            <span class="pill">Docker</span>
-            <span class="pill">Python</span>
-            <span class="pill">Nmap Automation</span>
-          </div>
-        </div>
-        <div>
-          <div class="hero-label">Highlights</div>
-          <div class="metrics">
-            <div class="metric">
-              <span>30+ </span><span>Hosts assessed / reports delivered</span>
-            </div>
-            <div class="metric">
-              <span>OWASP</span><span>Strong focus: Top 10 & business logic issues</span>
-            </div>
-            <div class="metric">
-              <span>Tooling</span><span>Built internal scanning & reporting platform</span>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="section-card">
-        <div class="timeline">
-          <div class="role">
-            <div class="role-title">Security Engineer · Company Name</div>
-            <div class="role-meta">2023 – Present · City, Country</div>
-            <ul>
-              <li>Led penetration tests for web apps, APIs, and infra; delivered actionable remediation plans.</li>
-              <li>Automated recon and reporting workflows using Docker, Python, and Nmap.</li>
-              <li>Collaborated with dev teams to fix findings and improve SDLC security.</li>
-            </ul>
-          </div>
-          <div class="role">
-            <div class="role-title">Junior Pentester · Other Company</div>
-            <div class="role-meta">2021 – 2023 · City, Country</div>
-            <ul>
-              <li>Performed vulnerability assessments and documented clear, reproducible PoCs.</li>
-              <li>Maintained internal tooling and wrote scripts for repeatable tests.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Selected Projects</h2>
-      <div class="section-card">
-        <div class="projects">
-          <div class="project">
-            <div class="project-title">Automated Scan Platform</div>
-            <div class="project-meta">Flask · Docker · Nmap · Neo4j</div>
-            <p>Containerized recon/scanning toolkit with web UI, knowledge base, and reporting.</p>
-            <a href="https://github.com/yourusername/project-repo" target="_blank" rel="noopener">View on GitHub →</a>
-          </div>
-          <div class="project">
-            <div class="project-title">AD Lab Environment</div>
-            <div class="project-meta">Homelab · AD · Attack Paths</div>
-            <p>Built realistic AD lab to practice attack chains and detections.</p>
-          </div>
-          <div class="project">
-            <div class="project-title">Bug Bounty Findings</div>
-            <div class="project-meta">Web · API</div>
-            <p>Reported critical auth & access control issues to multiple programs.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="section-card">
-        <div class="pill">Web & API Testing</div>
-        <div class="pill">Network & Infrastructure</div>
-        <div class="pill">Linux</div>
-        <div class="pill">Docker & Compose</div>
-        <div class="pill">Python / Bash scripting</div>
-        <div class="pill">Nmap, Burp Suite, ffuf</div>
-        <div class="pill">Git & GitHub Actions</div>
-        <div class="pill">Reporting & Communication</div>
-      </div>
-    </section>
-
-    <section id="education">
-      <h2>Education & Certifications</h2>
-      <div class="section-card">
-        <div class="edu-item"><strong>Degree Name</strong> — University, Years</div>
-        <div class="edu-item">Relevant certs (eJPT, OSCP, etc.) if applicable.</div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="section-card">
-        <p class="edu-item">
-          Based in City, Country — open to remote / onsite roles.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:you@example.com">you@example.com</a>
-          <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // Smooth scroll for older browsers
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('click', e => {
-        const href = a.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          e.preventDefault();
-          const el = document.querySelector(href);
-          if (!el) return;
-          const y = el.getBoundingClientRect().top + window.scrollY - 70;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
+  <footer>
+    <p>Follow me on Instagram:</p>
+    <a class="insta-link" href="https://instagram.com/your_instagram_username" target="_blank">
+      @them_is_tattooer
+    </a>
+    <p style="margin-top:20px; color:#555;">© 2025 Them_is_tattooer</p>
+  </footer>
 </body>
 </html>
+
 
 
