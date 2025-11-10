@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-label="Avatar placeholder">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff3399"/>
+      <stop offset="50%" stop-color="#b300ff"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </radialGradient>
+  </defs>
+  <rect width="144" height="144" rx="72" fill="url(#g)"/>
+  <g fill="#0d0d0d" opacity="0.25">
+    <circle cx="72" cy="60" r="28"/>
+    <path d="M24 132c8-28 32-44 48-44s40 16 48 44H24z"/>
+  </g>
+</svg>
