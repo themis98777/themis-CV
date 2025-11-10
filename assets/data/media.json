@@ -1,90 +1,33 @@
 [
   {
     "type": "image",
-    "src": "assets/img/IMG_3598.JPEG",
-    "alt": "Fresh tattoo with fine line work on forearm",
-    "caption": "Fine line tattoo — forearm",
-    "width": 800,
-    "height": 1000,
-    "categories": ["tattoo", "fine-line"],
-    "detail": {
-      "title": "Forearm Fine-Line Piece",
-      "description": "Delicate linework focusing on precision and minimal shading. Designed collaboratively to enhance forearm flow.",
-      "placement": "Forearm",
-      "style": ["Fine-line"],
-      "date": "2025-11-01",
-      "images": ["assets/img/IMG_3598.JPEG"]
-    }
+    "src": "assets/img/tattoo-snake-forearm.jpg",
+    "alt": "Blackwork snake tattoo wrapping around a forearm",
+    "title": "Snake Flow",
+    "caption": "Custom blackwork piece with clean curves and bold contrast.",
+    "categories": ["tattoo"]
   },
   {
     "type": "image",
-    "src": "assets/img/IMG_5339.JPEG",
-    "alt": "High-contrast tattoo design with shading",
-    "caption": "High-contrast shading",
-    "width": 800,
-    "height": 1000,
-    "categories": ["tattoo", "blackwork"],
-    "detail": {
-      "title": "Blackwork Contrast Study",
-      "description": "Bold blacks and gradients for long-term readability. Focus on saturation and healed appearance.",
-      "placement": "Upper Arm",
-      "style": ["Blackwork"],
-      "date": "2025-10-21",
-      "images": ["assets/img/IMG_5339.JPEG"]
-    }
+    "src": "assets/img/tattoo-fine-line-rose.jpg",
+    "alt": "Fine line rose tattoo on upper arm",
+    "title": "Fine Line Rose",
+    "caption": "Minimal fine line floral work focused on longevity.",
+    "categories": ["tattoo"]
   },
   {
     "type": "video",
-    "src": "assets/video/c8e283d617d84ff59c339be8d252adf1.MP4",
-    "caption": "Timelapse — session highlights",
-    "poster": "",
-    "controls": true,
-    "muted": false,
-    "loop": false,
-    "playsinline": true,
-    "categories": ["video", "timelapse"],
-    "detail": {
-      "title": "Session Timelapse",
-      "description": "Process capture showing stencil refinement, linework, and shading progression.",
-      "style": ["Process"],
-      "date": "2025-09-15",
-      "videos": ["assets/video/c8e283d617d84ff59c339be8d252adf1.MP4"]
-    }
+    "src": "assets/video/brand-promo-reel.mp4",
+    "title": "Brand Promo Reel",
+    "caption": "30s promo reel edited for a local brand.",
+    "categories": ["video"]
   },
   {
-    "type": "video",
-    "src": "assets/video/copy_49BEC1D0-2546-48B9-B597-8AEB3AE5BDD1.MP4",
-    "caption": "Tattoo reel — cuts",
-    "poster": "",
-    "controls": true,
-    "muted": false,
-    "loop": false,
-    "playsinline": true,
-    "categories": ["video", "reel"],
-    "detail": {
-      "title": "Promo Reel Cuts",
-      "description": "Short-form edit combining multiple healed pieces and fresh linework for social promotion.",
-      "style": ["Reel"],
-      "date": "2025-08-10",
-      "videos": ["assets/video/copy_49BEC1D0-2546-48B9-B597-8AEB3AE5BDD1.MP4"]
-    }
-  },
-  {
-    "type": "video",
-    "src": "assets/video/copy_6E12358B-8111-4361-8FDB-522463E45477.MP4",
-    "caption": "Behind the scenes",
-    "poster": "",
-    "controls": true,
-    "muted": false,
-    "loop": false,
-    "playsinline": true,
-    "categories": ["video", "bts"],
-    "detail": {
-      "title": "Behind The Scenes",
-      "description": "Environment prep, sterilization workflow, and client collaboration glimpses.",
-      "style": ["BTS"],
-      "date": "2025-07-04",
-      "videos": ["assets/video/copy_6E12358B-8111-4361-8FDB-522463E45477.MP4"]
-    }
+    "type": "image",
+    "src": "assets/img/social-grid-collab.jpg",
+    "alt": "Curated Instagram grid layout for a campaign",
+    "title": "Artist Campaign Grid",
+    "caption": "Visual direction & posts for a 4-week campaign.",
+    "categories": ["social"]
   }
 ]

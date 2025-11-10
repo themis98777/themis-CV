@@ -1,217 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Them_is_tattooer — Portfolio</title>
-    <meta name="description" content="Them_is_tattooer — Tattoo Artist, Video Editor, and Social Media Creator. View selected works and contact for bookings." />
-    <meta name="theme-color" content="#0f0f0f" />
-    <!-- Open Graph -->
-    <meta property="og:title" content="Them_is_tattooer — Portfolio" />
-    <meta property="og:description" content="Tattoo Artist | Video Editor | Social Media Creator" />
-    <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://themis98777.github.io/themis-CV/" />
-    <meta property="og:image" content="assets/img/og-image.jpg" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Themis — Tattoo Artist, Video Editor & Social Media Creator</title>
 
-    <!-- Preconnect and fonts (optional, system stack is fine otherwise) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="Tattoo artist specializing in clean linework and bold contrast. Video editor & social media creator crafting visuals for artists and brands. View selected work and book a tattoo." />
 
-    <link rel="icon" href="assets/img/favicon.png" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Themis — Tattoo Artist & Visual Creator" />
+  <meta property="og:description"
+        content="Selected tattoos, video edits, and social media work by Themis. Bookings & collaborations open." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/og-image.jpg" />
 
-    <!-- JSON-LD structured data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Them_is_tattooer",
-      "jobTitle": "Tattoo Artist",
-      "description": "Tattoo Artist, Video Editor, and Social Media Creator.",
-      "url": "https://themis98777.github.io/themis-CV/",
-      "sameAs": [
-        "https://www.instagram.com/them_is_tattooer/"
-      ]
-    }
-    </script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav class="topnav" role="navigation" aria-label="Primary">
-      <div class="container topnav__inner">
-        <a href="#" class="brand">Them_is_tattooer</a>
-        <ul class="topnav__links">
-          <li><a href="#main">Work</a></li>
-          <li><a href="#about-heading">About</a></li>
-          <li><a href="#booking-heading">Booking</a></li>
-          <li><a href="#aftercare-heading">Aftercare</a></li>
-          <li><a href="#contact-heading">Contact</a></li>
-        </ul>
-        <a class="a-btn topnav__cta" href="https://www.instagram.com/them_is_tattooer/" target="_blank" rel="noopener">Book via IG</a>
-      </div>
-    </nav>
-    <header class="hero" role="banner">
-      <div class="container">
-        <h1 class="hero__title">Them_is_tattooer</h1>
-        <p class="hero__tagline" aria-label="roles">Tattoo Artist | Video Editor | Social Media Creator</p>
-      </div>
-    </header>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Nunito+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet" />
 
-    <main id="main" class="section" role="main">
-      <div class="container">
-        <h2>Selected Work</h2>
-        <div class="gallery-controls">
-          <div class="search-box">
-            <label class="visually-hidden" for="gallery-search">Search gallery</label>
-            <input id="gallery-search" type="search" placeholder="Search by title or caption" aria-label="Search gallery" />
-          </div>
-          <div id="filters" class="filters multi" aria-label="Filter gallery"></div>
-          <button id="layout-toggle" class="filter-btn" type="button" aria-pressed="false" aria-label="Toggle masonry layout">Masonry: Off</button>
-          <div id="gallery-count" class="gallery-count" role="status" aria-live="polite" aria-atomic="true">0 items</div>
-        </div>
+  <!-- Icons (Font Awesome) -->
+  <!-- Updated integrity hash to match the delivered file (previous mismatch blocked the stylesheet). -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Gallery grid populated by assets/js/gallery.js from assets/data/media.json -->
-        <div class="media-grid" aria-live="polite">
-          <noscript>
-            <div class="placeholder">Enable JavaScript to view the gallery</div>
-          </noscript>
-        </div>
-      </div>
-    </main>
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-    <section class="section section--tight" aria-labelledby="about-heading">
-      <div class="container">
-        <h2 id="about-heading">About</h2>
-        <p class="lead">I’m Them_is_tattooer — Tattoo Artist, Video Editor, and Social Media Creator. I love clean linework, high-contrast composition, and storytelling across skin and screen.</p>
-      </div>
-    </section>
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Themis",
+    "jobTitle": "Tattoo Artist, Video Editor, Social Media Creator",
+    "url": "https://themis98777.github.io/themis-CV/",
+    "sameAs": [
+      "https://www.instagram.com/them_is_tattooer/"
+    ]
+  }
+  </script>
 
-    
+  <!-- JS -->
+  <script src="assets/js/gallery.js" defer></script>
+</head>
+<body class="theme-b">
+<a class="skip-link" href="#main">Skip to content</a>
 
-    <section class="section" aria-labelledby="booking-heading">
-      <div class="container">
-        <h2 id="booking-heading">Booking</h2>
-        <div class="booking-steps">
-          <div class="booking-step">
-            <h3>1. Share your idea</h3>
-            <p>Describe the concept, size, and placement. Reference images help.</p>
-          </div>
-          <div class="booking-step">
-            <h3>2. Schedule & deposit</h3>
-            <p>We confirm a date and collect a small deposit to secure the session.</p>
-          </div>
-          <div class="booking-step">
-            <h3>3. Session & aftercare</h3>
-            <p>We’ll finalize the stencil together. You’ll receive an aftercare guide.</p>
-          </div>
-        </div>
-        <div class="cta-row">
-          <a class="a-btn" href="https://www.instagram.com/them_is_tattooer/" target="_blank" rel="noopener">Book via Instagram</a>
-          <a class="a-btn" href="#contact-heading">Contact</a>
-        </div>
-      </div>
-    </section>
-
-    
-
-    <section class="section section--tight" aria-labelledby="aftercare-heading">
-      <div class="container">
-        <h2 id="aftercare-heading">Aftercare</h2>
-        <ul class="aftercare-list">
-          <li><strong>Day 1–3:</strong> Keep the wrap as advised. Wash gently with lukewarm water and fragrance-free soap, pat dry, and apply a thin layer of ointment.</li>
-          <li><strong>Day 4–14:</strong> Moisturize 2–3× daily. Avoid soaking, sun, and scratching while it peels.</li>
-          <li><strong>After 2 weeks:</strong> Continue moisturizing. Use SPF to protect your tattoo.</li>
-        </ul>
-      </div>
-    </section>
-    <section class="section section--tight" aria-labelledby="contact-heading">
-      <div class="container">
-        <h2 id="contact-heading">Contact</h2>
-        <p>Follow me on Instagram for latest work and bookings.</p>
-        <p>
-          <a class="social-link" href="https://www.instagram.com/them_is_tattooer/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
-            @them_is_tattooer
+<header class="site-header">
+  <div class="inner">
+    <div class="logo">
+      <a href="#top" class="logo-link">Themis</a>
+    </div>
+    <nav class="nav">
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-list">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#booking">Booking</a></li>
+        <li><a href="#aftercare">Aftercare</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="https://www.instagram.com/them_is_tattooer/"
+             class="btn-nav"
+             target="_blank"
+             rel="noopener noreferrer">
+            Book via IG
           </a>
-        </p>
-        <!-- Static Instagram snapshot (manually update values as needed) -->
-        <div class="social-snapshot" aria-label="Instagram snapshot (static)">
-          <article class="social-card" aria-label="Instagram profile">
-            <div class="social-card__header">
-              <img class="social-card__avatar" src="assets/img/instagram-avatar.svg" alt="Instagram profile picture" loading="lazy" width="72" height="72" />
-              <div>
-                <div style="font-weight:600">@them_is_tattooer</div>
-                <div class="manual-note">Static snapshot — update occasionally</div>
-              </div>
-            </div>
-            <div class="stat-row" role="list">
-              <div class="stat" role="listitem"><span>Followers</span><span>—</span></div>
-              <div class="stat" role="listitem"><span>Following</span><span>—</span></div>
-              <div class="stat" role="listitem"><span>Posts</span><span>—</span></div>
-            </div>
-            <div class="bio-lines">
-              Tattoo Artist | Video Editor | Social Media Creator
-            </div>
-          </article>
-        </div>
-        <!-- Optional booking link/email
-        <p>
-          <a class="a-btn" href="mailto:booking@example.com">Booking inquiries</a>
-        </p>
-        -->
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="page" aria-label="Themis portfolio">
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <div class="hero-left">
+      <h1>Themis</h1>
+      <p class="roles">Tattoo Artist · Video Editor · Social Media Creator</p>
+      <p class="tagline">
+        Sharp lines. Bold contrast. Stories built for skin &amp; screen.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn primary">View selected work</a>
+        <a href="#booking" class="btn ghost">Book a tattoo</a>
       </div>
-    </section>
+    </div>
+    <div class="hero-right">
+      <!-- Swapped missing hero-tattoo.jpg with an existing repository image -->
+      <img src="assets/img/IMG_3598.JPEG"
+           alt="Sample tattoo portfolio piece with clean linework"
+           loading="lazy" width="600" height="800" />
+    </div>
+  </section>
 
-    <footer role="contentinfo">
-      <div class="container">
-        <p><span class="footer__brand">Them_is_tattooer</span> — Tattoo Artist | Video Editor | Social Media Creator</p>
-        <p>© <span id="year"></span> Them_is_tattooer</p>
+  <!-- SELECTED WORK -->
+  <section id="work" class="section">
+    <div class="section-header">
+      <h2>Selected Work</h2>
+      <p>Curated tattoos, edits, and campaigns.</p>
+    </div>
+
+    <div class="work-controls">
+      <div class="filters" aria-label="Filter by category">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="tattoo">Tattoo</button>
+        <button class="filter-btn" data-filter="video">Video</button>
+        <button class="filter-btn" data-filter="social">Social</button>
       </div>
-    </footer>
-
-    <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" hidden>↑</button>
-
-    <!-- Lightbox modal -->
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer" hidden>
-      <div class="lightbox__backdrop" data-close></div>
-      <div class="lightbox__content" role="document">
-        <button class="lightbox__close" type="button" aria-label="Close" data-close>×</button>
-        <div class="lightbox__body" id="lightbox-body"></div>
-        <div class="lightbox__caption" id="lightbox-caption"></div>
-        <div class="lightbox__nav">
-          <button id="lightbox-prev" class="lightbox__prev" type="button" aria-label="Previous">‹</button>
-          <button id="lightbox-next" class="lightbox__next" type="button" aria-label="Next">›</button>
-        </div>
+      <div class="search">
+        <input type="search"
+               id="gallery-search"
+               placeholder="Search gallery"
+               aria-label="Search gallery" />
       </div>
     </div>
 
-    <!-- Case-study modal -->
-    <div id="case-modal" class="case-modal" role="dialog" aria-modal="true" aria-label="Project details" hidden>
-      <div class="case-modal__backdrop" data-close></div>
-      <div class="case-modal__content" role="document">
-        <button class="case-modal__close" type="button" aria-label="Close" data-close>Close</button>
-        <h3 class="case-modal__title" id="case-title"></h3>
-        <div class="case-meta" id="case-meta"></div>
-        <div class="case-description" id="case-description"></div>
-        <div class="case-gallery" id="case-gallery"></div>
+    <div id="work-grid" class="work-grid">
+      <noscript>
+        <p>Enable JavaScript to see the gallery.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section section-split">
+    <div>
+      <h2>About</h2>
+      <p>
+        I’m Themis, a tattoo artist focused on clean linework, high-contrast compositions,
+        and custom designs that age well.
+      </p>
+      <p>
+        I also work as a video editor and social media creator, crafting short-form
+        content, promos, and visual stories for artists and brands.
+      </p>
+    </div>
+    <div class="skills">
+      <h3>What I do</h3>
+      <ul>
+        <li><strong>Tattooing:</strong> blackwork, fine line, lettering, custom pieces</li>
+        <li><strong>Video Editing:</strong> reels, music clips, promo videos</li>
+        <li><strong>Social Media:</strong> content concepts, visuals & campaigns</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking" class="section">
+    <h2>Booking</h2>
+    <p>For tattoo appointments, send me:</p>
+    <ul>
+      <li>Your idea &amp; placement</li>
+      <li>Approximate size (in cm)</li>
+      <li>Reference images (if you have any)</li>
+      <li>Preferred dates / times</li>
+    </ul>
+    <p>I reply to serious inquiries as soon as possible.</p>
+    <a href="https://www.instagram.com/them_is_tattooer/"
+       class="btn primary"
+       target="_blank"
+       rel="noopener noreferrer">
+      Book via Instagram
+    </a>
+  </section>
+
+  <!-- AFTERCARE -->
+  <section id="aftercare" class="section">
+    <h2>Aftercare</h2>
+    <ol class="aftercare-list">
+      <li>Keep the wrap as advised. Wash gently with lukewarm water &amp; fragrance-free soap.</li>
+      <li>Pat dry; apply a thin layer of recommended ointment.</li>
+      <li>Days 4–14: moisturize regularly, avoid soaking, scratching, or direct sun.</li>
+      <li>After healing: keep using SPF to protect the tattoo &amp; preserve contrast.</li>
+    </ol>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section-split">
+    <div>
+      <h2>Contact</h2>
+      <p><strong>Tattoo bookings:</strong> via Instagram DMs.</p>
+      <p>
+        <strong>Video &amp; collabs:</strong>
+        <a href="mailto:themis.contact@example.com">themis.contact@example.com</a>
+        <!-- replace with real email -->
+      </p>
+      <p>Open to collaborations, brand work, and guest spots.</p>
+    </div>
+    <div>
+      <h3>Social</h3>
+      <div class="social-links">
+        <a href="https://www.instagram.com/them_is_tattooer/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
       </div>
     </div>
+  </section>
+</main>
 
-    <script src="assets/js/gallery.js" defer></script>
-    <script>
-      // Update year automatically
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-  </body>
-  
+<footer class="site-footer">
+  <div class="inner footer-grid">
+    <div>
+      <h3>Themis</h3>
+      <p>Tattoo Artist · Video Editor · Social Media Creator</p>
+    </div>
+    <div>
+      <h3>Visit</h3>
+      <p>Follow Instagram for latest work &amp; flash drops.</p>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <p>All artwork © Themis. Website code MIT.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightbox-backdrop"></div>
+  <div class="lightbox-content" role="dialog" aria-modal="true">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <div class="lightbox-media"></div>
+    <p class="lightbox-caption"></p>
+  </div>
+</div>
+
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
