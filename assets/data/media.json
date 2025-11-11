@@ -1,14 +1,6 @@
 [
   {
     "type": "image",
-    "src": "assets/img/503996870_18462361030076212_8640799067265327670_n.jpg",
-    "alt": "Tattoo portfolio piece",
-    "title": "Tattoo Work",
-    "caption": "Selected tattoo piece.",
-    "categories": ["selected","tattoo"]
-  },
-  {
-    "type": "image",
     "src": "assets/img/IMG_0799.JPEG",
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
