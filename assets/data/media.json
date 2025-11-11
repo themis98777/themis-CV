@@ -1,33 +1,102 @@
 [
   {
     "type": "image",
-    "src": "assets/img/tattoo-snake-forearm.jpg",
-    "alt": "Blackwork snake tattoo wrapping around a forearm",
-    "title": "Snake Flow",
-    "caption": "Custom blackwork piece with clean curves and bold contrast.",
+    "src": "assets/img/503996870_18462361030076212_8640799067265327670_n.jpg",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
     "categories": ["tattoo"]
   },
   {
     "type": "image",
-    "src": "assets/img/tattoo-fine-line-rose.jpg",
-    "alt": "Fine line rose tattoo on upper arm",
-    "title": "Fine Line Rose",
-    "caption": "Minimal fine line floral work focused on longevity.",
+    "src": "assets/img/IMG_0799.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_2429.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_2430.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_3030.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_3093.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_3598.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_3604.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_5339.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
     "categories": ["tattoo"]
   },
   {
     "type": "video",
-    "src": "assets/video/brand-promo-reel.mp4",
-    "title": "Brand Promo Reel",
-    "caption": "30s promo reel edited for a local brand.",
+    "src": "assets/video/c8e283d617d84ff59c339be8d252adf1.MP4",
+    "title": "Tattoo Reel",
+    "caption": "Short tattoo reel.",
     "categories": ["video"]
   },
   {
-    "type": "image",
-    "src": "assets/img/social-grid-collab.jpg",
-    "alt": "Curated Instagram grid layout for a campaign",
-    "title": "Artist Campaign Grid",
-    "caption": "Visual direction & posts for a 4-week campaign.",
-    "categories": ["social"]
+    "type": "video",
+    "src": "assets/video/copy_49BEC1D0-2546-48B9-B597-8AEB3AE5BDD1.MP4",
+    "title": "Tattoo Reel",
+    "caption": "Short tattoo reel.",
+    "categories": ["video"]
+  },
+  {
+    "type": "video",
+    "src": "assets/video/copy_4C36E74D-CDA7-4780-A235-3D3DEE8DCF32.MP4",
+    "title": "Tattoo Reel",
+    "caption": "Short tattoo reel.",
+    "categories": ["video"]
+  },
+  {
+    "type": "video",
+    "src": "assets/video/copy_6E12358B-8111-4361-8FDB-522463E45477.MP4",
+    "title": "Tattoo Reel",
+    "caption": "Short tattoo reel.",
+    "categories": ["video"]
   }
 ]

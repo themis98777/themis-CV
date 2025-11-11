@@ -29,6 +29,9 @@ video {
   --color-accent: #f97316;
   --color-accent-rgb: 249,115,22;
   --color-border: rgba(249,115,22,0.15);
+  --color-gold: #d4af37;
+  --color-gold-soft: #b8962c;
+  --glow-gold: 0 0 0 2px rgba(212,175,55,0.15), 0 0 14px rgba(212,175,55,0.25);
   --shadow-card: 0 10px 24px rgba(0,0,0,0.5);
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -49,6 +52,9 @@ body.theme-b {
   --color-accent: #d6b25a;
   --color-accent-rgb: 214,178,90;
   --color-border: rgba(214,178,90,0.18);
+  --color-gold: #d6b25a;
+  --color-gold-soft: #b69444;
+  --glow-gold: 0 0 0 2px rgba(214,178,90,0.15), 0 0 18px rgba(214,178,90,0.35);
   --shadow-card: 0 14px 32px rgba(0,0,0,0.55);
 }
 
@@ -101,6 +107,11 @@ a {
   font-size: 1.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  background: linear-gradient(90deg,var(--color-gold) 0%, var(--color-accent) 60%, var(--color-gold-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
 }
 
 .nav {
@@ -163,6 +174,11 @@ a {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin: 0 0 0.5rem;
+  background: linear-gradient(135deg,var(--color-gold) 0%, var(--color-accent) 55%, var(--color-gold-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.55));
 }
 
 .roles {
@@ -196,11 +212,13 @@ a {
 .btn.primary {
   background: var(--color-accent);
   color: #050509;
+  box-shadow: var(--glow-gold);
 }
 .btn.ghost {
   background: transparent;
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 0 2px rgba(0,0,0,0.6);
 }
 
 .hero-right img {
@@ -208,6 +226,18 @@ a {
   object-fit: cover;
   min-height: 220px;
   background: var(--color-bg-alt);
+  aspect-ratio: 1 / 1; /* force square crop */
+  width: 100%;
+  height: auto;
+}
+
+/* Ensure container doesn't stretch oddly */
+.hero-right { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 /* Sections */
@@ -301,6 +331,20 @@ a {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
+  position: relative;
+  padding-left: 0.65rem;
+}
+.work-item-label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle at 30% 30%, var(--color-gold) 0%, var(--color-accent) 70%);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 6px rgba(0,0,0,0.4), 0 0 8px rgba(214,178,90,0.4);
 }
 
 .work-item-title {
@@ -316,6 +360,8 @@ a {
 .work-media {
   border-radius: 0.6rem;
   background: var(--color-bg);
+  outline: 1px solid rgba(214,178,90,0.12);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.5);
 }
 
 /* Skills */
@@ -378,6 +424,11 @@ a {
   font-family: 'Cinzel Decorative', serif;
   font-size: 0.95rem;
   margin: 0 0 0.2rem;
+  background: linear-gradient(90deg,var(--color-gold) 0%, var(--color-accent) 70%, var(--color-gold-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
 }
 
 /* Lightbox */
