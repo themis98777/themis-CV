@@ -44,7 +44,8 @@
   </script>
 
   <!-- JS -->
-  <script src="assets/js/gallery.js" defer></script>
+  <!-- Cache-bust to ensure latest gallery logic loads -->
+  <script src="assets/js/gallery.js?v=2" defer></script>
 </head>
 <body class="theme-b">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -124,6 +125,9 @@
       <noscript>
         <p>Enable JavaScript to see the gallery.</p>
       </noscript>
+    </div>
+    <div class="work-pagination">
+      <button id="next-page" class="btn ghost" aria-label="Next page of work">Next</button>
     </div>
   </section>
 

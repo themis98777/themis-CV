@@ -40,6 +40,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = getSearchInput();
   let filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+  const nextBtn = document.getElementById("next-page");
+
+  // Pagination state (2 rows only)
+  let currentPage = 0;
+  let perPage = 0; // computed from grid column count * 2 rows
+
+  function getColumnCount() {
+    const style = window.getComputedStyle(grid);
+    let template = style.getPropertyValue("grid-template-columns");
+    if (!template) return 1;
+    template = template.trim();
+    // If browser returns explicit tracks like '294px 294px 294px', count tokens
+    let explicit = template.split(/\s+/).filter(Boolean);
+    if (explicit.length > 1 && !explicit[0].includes("repeat")) {
+      return explicit.length;
+    }
+    // Fallback: estimate based on min card width including gap
+    const gap = parseFloat(style.getPropertyValue("gap")) || 16;
+    const minCard = 230;
+    return Math.max(1, Math.floor((grid.clientWidth + gap) / (minCard + gap)));
+  }
+  function computePerPage() {
+    const cols = getColumnCount();
+    perPage = Math.max(1, cols * 2); // baseline: exactly 2 rows
+  }
+
+  // Robust measurement by temporarily laying out some cards to count columns
+  function measureColumnsByLayout(sampleItems) {
+    if (!sampleItems || !sampleItems.length) return null;
+    const maxProbe = Math.min(sampleItems.length, 12);
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < maxProbe; i++) frag.appendChild(renderCard(sampleItems[i]));
+    const prev = grid.innerHTML;
+    const prevVis = grid.style.visibility;
+    grid.style.visibility = "hidden";
+    grid.innerHTML = "";
+    grid.appendChild(frag);
+    const kids = Array.from(grid.children);
+    let cols = 1;
+    if (kids.length) {
+      const top0 = kids[0].offsetTop;
+      cols = kids.findIndex((el) => el.offsetTop !== top0);
+      if (cols === -1) cols = kids.length; // all on same row
+    }
+    grid.innerHTML = "";
+    grid.style.visibility = prevVis;
+    // restore will be handled by render following call
+    return cols || 1;
+  }
+  // initialize perPage and update on resize
+  computePerPage();
+  window.addEventListener("resize", () => {
+    const before = perPage;
+    computePerPage();
+    if (perPage !== before) {
+      currentPage = 0; // reset to first when layout changes
+      render();
+    }
+  });
 
   // Lightbox compatibility (old & new markup)
   const lightbox = document.getElementById("lightbox") || document.querySelector(".lightbox");
@@ -68,6 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
       items = Array.isArray(data) ? data : [];
       // Collect categories for dynamic filters if needed
       items.forEach((it) => Array.isArray(it.categories) && it.categories.forEach((c) => categorySet.add(c)));
+      // Recompute perPage after data is available and grid likely laid out
+      computePerPage();
       ensureFilters();
       render();
     })
@@ -101,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       activeFilter = value;
+      currentPage = 0;
       render();
     });
     return btn;
@@ -113,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.innerHTML = "";
 
     const term = searchTerm.trim().toLowerCase();
-    const visible = items.filter((item) => {
+    const filtered = items.filter((item) => {
       const cats = item.categories || [];
       const matchesFilter = activeFilter === "all" || cats.includes(activeFilter);
       const haystack = ((item.title || "") + " " + (item.caption || "") + " " + (item.alt || "")).toLowerCase();
@@ -121,12 +183,30 @@ document.addEventListener("DOMContentLoaded", () => {
       return matchesFilter && matchesSearch;
     });
 
-    if (!visible.length) {
+    if (!filtered.length) {
       grid.innerHTML = '<p class="work-item-caption">No items yet. Add your tattoos and videos in media.json.</p>';
+      if (nextBtn) nextBtn.style.display = "none";
       return;
     }
+  // Pagination: ensure perPage reflects real layout
+  if (!perPage || perPage < 1) computePerPage();
+  const measuredCols = measureColumnsByLayout(filtered);
+  if (measuredCols && measuredCols > 0) perPage = Math.max(1, measuredCols * 2);
+    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+    if (currentPage >= totalPages) currentPage = 0;
+    const start = currentPage * perPage;
+    const pageItems = filtered.slice(start, start + perPage);
 
-    visible.forEach((item) => grid.appendChild(renderCard(item)));
+    pageItems.forEach((item) => grid.appendChild(renderCard(item)));
+
+    if (nextBtn) {
+      nextBtn.style.display = totalPages > 1 ? "inline-block" : "none";
+      nextBtn.textContent = `Next (${currentPage + 1}/${totalPages})`;
+      nextBtn.onclick = () => {
+        currentPage = (currentPage + 1) % totalPages;
+        render();
+      };
+    }
   }
 
   function renderCard(item) {
@@ -180,6 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
       filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       activeFilter = btn.dataset.filter || "all";
+      currentPage = 0;
       render();
     });
   });
@@ -190,6 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       searchTerm = e.target.value;
+      currentPage = 0;
       render();
     });
   }
