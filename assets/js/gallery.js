@@ -199,6 +199,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pageItems.forEach((item) => grid.appendChild(renderCard(item)));
 
+    // Add ghost placeholders to keep grid cell sizing consistent when last page not full
+    const deficit = perPage - pageItems.length;
+    for (let i = 0; i < deficit; i++) {
+      const ghost = document.createElement(usingWorkDesign() ? "article" : "figure");
+      ghost.className = usingWorkDesign() ? "work-item ghost" : "media-card ghost";
+      grid.appendChild(ghost);
+    }
+
     if (nextBtn) {
       nextBtn.style.display = totalPages > 1 ? "inline-block" : "none";
       nextBtn.textContent = `Next (${currentPage + 1}/${totalPages})`;

@@ -104,7 +104,7 @@ a {
 
 .logo-link {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 1.2rem + 1.2vw, 2rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   background: linear-gradient(90deg,var(--color-gold) 0%, var(--color-accent) 60%, var(--color-gold-soft) 100%);
@@ -170,7 +170,7 @@ a {
 
 .hero h1 {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 3.4rem;
+  font-size: clamp(2.2rem, 4vw + 0.6rem, 4rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin: 0 0 0.5rem;
@@ -184,14 +184,14 @@ a {
 .roles {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 0.8rem + 0.4vw, 1rem);
 }
 
 .tagline {
   margin: 1.25rem 0 1.75rem;
   color: #e4e4e7;
   max-width: 26rem;
-  font-size: 0.98rem;
+  font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.05rem);
 }
 
 .hero-actions {
@@ -226,7 +226,7 @@ a {
   object-fit: cover;
   min-height: 220px;
   background: var(--color-bg-alt);
-  aspect-ratio: 1 / 1; /* force square crop */
+  aspect-ratio: 1 / 1; /* square hero */
   width: 100%;
   height: auto;
 }
@@ -236,7 +236,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 480px;
+  max-width: clamp(300px, 38vw, 560px);
   margin: 0 auto;
 }
 
@@ -249,7 +249,7 @@ a {
 .section-header h2,
 .section h2 {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem);
   margin: 0 0 0.3rem;
 }
 .section-header p,
@@ -368,6 +368,26 @@ a {
   background: var(--color-bg);
   outline: 1px solid rgba(214,178,90,0.12);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.5);
+  /* IG-style portrait tiles (4:5) */
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Ensure legacy figure markup thumbs match the same ratio */
+.media-card__thumb {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+
+/* Placeholder cards to keep last row aligned; they occupy space but remain invisible */
+.work-item.ghost,
+.media-card.ghost {
+  visibility: hidden;
 }
 
 /* Skills */
@@ -507,7 +527,7 @@ a {
     padding: 0.6rem 1.1rem;
   }
   .page {
-    padding: 4rem 1.1rem 3rem;
+    padding: 3.5rem 1rem 2.4rem;
   }
 
   .nav-toggle {
@@ -518,16 +538,66 @@ a {
     position: absolute;
     right: 0;
     top: 120%;
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1.1rem;
     background: #050509;
     border-radius: 0.75rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.6rem;
+    gap: 0.8rem;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
     display: none;
   }
   .nav-list.open {
     display: flex;
   }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .hero {
+    gap: 1.5rem;
+    padding: 2.2rem 0 1.6rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.05em;
+  }
+  .hero-right { max-width: 360px; }
+  .roles { font-size: 0.9rem; }
+  .tagline { font-size: 0.92rem; }
+
+  .filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: #d4d4d8;
+    white-space: nowrap;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .work-pagination { margin-top: 0.6rem; }
+  #next-page {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Motion and focus accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }

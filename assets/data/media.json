@@ -5,7 +5,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -13,7 +13,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -21,7 +21,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -29,7 +29,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -37,7 +37,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -45,7 +45,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -53,7 +53,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -61,7 +61,7 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "image",
@@ -69,34 +69,34 @@
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
-    "categories": ["tattoo"]
+    "categories": ["selected","tattoo"]
   },
   {
     "type": "video",
     "src": "assets/video/c8e283d617d84ff59c339be8d252adf1.MP4",
     "title": "Tattoo Reel",
     "caption": "Short tattoo reel.",
-    "categories": ["video"]
+    "categories": ["selected","reels","videos"]
   },
   {
     "type": "video",
     "src": "assets/video/copy_49BEC1D0-2546-48B9-B597-8AEB3AE5BDD1.MP4",
     "title": "Tattoo Reel",
     "caption": "Short tattoo reel.",
-    "categories": ["video"]
+    "categories": ["selected","reels","videos"]
   },
   {
     "type": "video",
     "src": "assets/video/copy_4C36E74D-CDA7-4780-A235-3D3DEE8DCF32.MP4",
     "title": "Tattoo Reel",
     "caption": "Short tattoo reel.",
-    "categories": ["video"]
+    "categories": ["selected","reels","videos"]
   },
   {
     "type": "video",
     "src": "assets/video/copy_6E12358B-8111-4361-8FDB-522463E45477.MP4",
     "title": "Tattoo Reel",
     "caption": "Short tattoo reel.",
-    "categories": ["video"]
+    "categories": ["selected","reels","videos"]
   }
 ]
