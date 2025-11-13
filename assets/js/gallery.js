@@ -273,6 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // If the user removed a filter button (e.g., 'reels'), ensure activeFilter isn't stale
+  if (activeFilter === 'reels') activeFilter = 'all';
+
   /* =============================
      Search
      ============================= */
