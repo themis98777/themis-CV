@@ -118,6 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchTerm = "";
   let categorySet = new Set();
   const DEFAULT_VIDEO_POSTER = createDefaultVideoPoster();
+  let visibleItems = [];
+  let currentIndex = -1;
 
   /* =============================
      Data Load
@@ -183,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchesSearch = !term || haystack.includes(term);
       return matchesFilter && matchesSearch;
     });
+    visibleItems = filtered;
 
     if (!filtered.length) {
       grid.innerHTML = '<p class="work-item-caption">No items yet. Add your tattoos and videos in media.json.</p>';
@@ -299,25 +302,35 @@ document.addEventListener("DOMContentLoaded", () => {
   function openLightbox(item) {
     if (!lightbox || !lightboxMedia) return;
     lightboxMedia.innerHTML = "";
-    if (item.type === "video") {
+    currentIndex = Math.max(0, visibleItems.findIndex((it) => it.src === item.src && it.type === item.type));
+    showLightboxIndex(currentIndex);
+  }
+  function showLightboxIndex(index) {
+    if (!lightbox || !lightboxMedia) return;
+    if (!visibleItems || !visibleItems.length) return;
+    const total = visibleItems.length;
+    currentIndex = ((index % total) + total) % total; // wrap
+    const it = visibleItems[currentIndex];
+    lightboxMedia.innerHTML = "";
+    if (it.type === "video") {
       const video = document.createElement("video");
       video.controls = true;
       video.playsInline = true;
       video.autoplay = true;
       video.preload = "metadata";
       const src = document.createElement("source");
-      src.src = item.src;
-      const ext = (item.src.split('.').pop() || '').toLowerCase();
+      src.src = it.src;
+      const ext = (it.src.split('.').pop() || '').toLowerCase();
       src.type = ext === 'mov' ? 'video/quicktime' : 'video/mp4';
       video.appendChild(src);
       lightboxMedia.appendChild(video);
     } else {
       const img = document.createElement("img");
-      img.src = item.src;
-      img.alt = item.alt || "";
+      img.src = it.src;
+      img.alt = it.alt || "";
       lightboxMedia.appendChild(img);
     }
-    if (lightboxCaption) lightboxCaption.textContent = item.caption || item.title || "";
+    if (lightboxCaption) lightboxCaption.textContent = "";
     lightbox.classList.add("active");
     lightbox.removeAttribute("hidden");
     lightbox.setAttribute("aria-hidden", "false");
@@ -331,11 +344,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lightboxCaption) lightboxCaption.textContent = "";
   }
   if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+  const lightboxPrev = document.querySelector('.lightbox-prev');
+  const lightboxNext = document.querySelector('.lightbox-next');
+  if (lightboxPrev) lightboxPrev.addEventListener('click', () => showLightboxIndex((currentIndex || 0) - 1));
+  if (lightboxNext) lightboxNext.addEventListener('click', () => showLightboxIndex((currentIndex || 0) + 1));
   if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox && (lightbox.classList.contains("active") || !lightbox.hasAttribute("hidden"))) {
-      closeLightbox();
-    }
+    const isOpen = lightbox && (lightbox.classList.contains("active") || !lightbox.hasAttribute("hidden"));
+    if (e.key === "Escape" && isOpen) closeLightbox();
+    if (!isOpen) return;
+    if (e.key === 'ArrowLeft') showLightboxIndex((currentIndex || 0) - 1);
+    if (e.key === 'ArrowRight') showLightboxIndex((currentIndex || 0) + 1);
   });
   // Create a lightweight default poster for videos to avoid loading video data in the grid
   function createDefaultVideoPoster() {
