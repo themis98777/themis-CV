@@ -58,6 +58,19 @@ body.theme-b {
   --shadow-card: 0 14px 32px rgba(0,0,0,0.55);
 }
 
+/* Global background pattern (uses assets/data/background.png) */
+body.theme-b {
+  /* Overlay + tiled pattern for legibility */
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("../data/background.png");
+  background-repeat: no-repeat, repeat; /* overlay not repeated; pattern repeated */
+  background-size: auto, 240px 240px;   /* tweak the second size to scale pattern */
+  background-position: 0 0, top left;
+  background-attachment: fixed, fixed;  /* keep subtle parallax stillness */
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -168,12 +181,37 @@ a {
   align-items: center;
 }
 
+/* Center the left block by default to keep typography aligned */
+.hero-left {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Center the hero text block within the space before the image on larger screens */
+@media (min-width: 768px) {
+  /* keep two columns earlier to avoid the image dropping under on medium screens */
+  .hero { grid-template-columns: minmax(0, 1.6fr) minmax(220px, 1.2fr); }
+}
+
+@media (min-width: 900px) {
+  .hero-left {
+    justify-self: center; /* center the whole block in its grid column */
+    text-align: center;   /* center text lines and buttons */
+    max-width: 620px;     /* keep a comfortable line length */
+    width: 100%;
+  }
+  .hero-actions { 
+    justify-content: center; /* center CTA buttons under text */
+  }
+}
+
 .hero h1 {
   font-family: 'Cinzel Decorative', serif;
   font-size: clamp(2.2rem, 4vw + 0.6rem, 4rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin: 0 0 0.5rem;
+  text-align: center; /* ensure heading centers even when layout shifts */
   background: linear-gradient(135deg,var(--color-gold) 0%, var(--color-accent) 55%, var(--color-gold-soft) 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -185,19 +223,22 @@ a {
   margin: 0;
   color: var(--color-text-muted);
   font-size: clamp(0.9rem, 0.8rem + 0.4vw, 1rem);
+  text-align: center; /* ensure centered regardless of parent */
 }
 
 .tagline {
-  margin: 1.25rem 0 1.75rem;
+  margin: 1.25rem auto 1.75rem; /* center the block itself */
   color: #e4e4e7;
   max-width: 26rem;
   font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.05rem);
+  text-align: center; /* center text lines */
 }
 
 .hero-actions {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
+  justify-content: center; /* center CTA buttons at all sizes */
 }
 
 .btn {
@@ -236,7 +277,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: clamp(300px, 38vw, 560px);
+  /* Make profile image appear smaller overall */
+  max-width: clamp(220px, 28vw, 420px);
   margin: 0 auto;
 }
 
@@ -523,6 +565,10 @@ a {
 }
 
 @media (max-width: 768px) {
+  /* On phones: show image first, then text */
+  .hero { display: flex; flex-direction: column; }
+  .hero-right { order: -1; }
+
   .site-header .inner {
     padding: 0.6rem 1.1rem;
   }
