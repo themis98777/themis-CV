@@ -199,6 +199,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pageItems.forEach((item) => grid.appendChild(renderCard(item)));
 
+    // After cards are in DOM, ensure videos show a poster frame instead of black
+    ensureVideoPosters(grid);
+
     // Add ghost placeholders to keep grid cell sizing consistent when last page not full
     const deficit = perPage - pageItems.length;
     for (let i = 0; i < deficit; i++) {
@@ -228,8 +231,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const primaryLabel = (item.categories && item.categories[0]) || item.type || "work";
     let mediaHtml = "";
     if (item.type === "video") {
+      const ext = (item.src.split('.').pop() || '').toLowerCase();
+      const mime = ext === 'mov' ? 'video/quicktime' : 'video/mp4';
       mediaHtml = `<video class="${usingWorkDesign() ? "work-media" : "media-card__thumb"}" controls preload="metadata" playsinline>
-          <source src="${item.src}" type="video/mp4" />
+          <source src="${item.src}" type="${mime}" />
           Your browser does not support the video tag.
         </video>`;
     } else {
@@ -300,7 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
       video.autoplay = true;
       const src = document.createElement("source");
       src.src = item.src;
-      src.type = "video/mp4";
+      const ext = (item.src.split('.').pop() || '').toLowerCase();
+      src.type = ext === 'mov' ? 'video/quicktime' : 'video/mp4';
       video.appendChild(src);
       lightboxMedia.appendChild(video);
     } else {
@@ -329,4 +335,78 @@ document.addEventListener("DOMContentLoaded", () => {
       closeLightbox();
     }
   });
+  // Generate poster images for videos at runtime to avoid black tiles
+  function ensureVideoPosters(scope) {
+    const container = scope || document;
+    const videos = Array.from(container.querySelectorAll('video'));
+    if (!videos.length) return;
+    videos.forEach((video) => {
+      if (video.getAttribute('poster')) return;
+      let captured = false;
+      const cleanup = () => {
+        video.removeEventListener('loadeddata', onLoaded);
+        video.removeEventListener('seeked', onSeeked);
+        video.removeEventListener('error', onError);
+      };
+      const setPlaceholder = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 400; canvas.height = 500;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#0d0d14';
+          ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.strokeStyle = 'rgba(214,178,90,0.25)';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(3,3,canvas.width-6,canvas.height-6);
+          ctx.fillStyle = '#d4af37';
+          const size = 90; const cx = canvas.width/2; const cy = canvas.height/2;
+          ctx.beginPath();
+          ctx.moveTo(cx - size/2, cy - size/1.5);
+          ctx.lineTo(cx - size/2, cy + size/1.5);
+          ctx.lineTo(cx + size/1.2, cy);
+          ctx.closePath();
+          ctx.fill();
+          try { video.setAttribute('poster', canvas.toDataURL('image/png')); } catch(e) {}
+        }
+      };
+      const captureFrame = () => {
+        if (captured) return;
+        captured = true;
+        try {
+          const canvas = document.createElement('canvas');
+          const w = video.videoWidth || 400;
+          const h = video.videoHeight || 500;
+          canvas.width = 400; canvas.height = 500;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            const targetRatio = 4/5;
+            const srcRatio = w/h || targetRatio;
+            let drawW = canvas.width;
+            let drawH = Math.round(drawW / srcRatio);
+            if (drawH > canvas.height) {
+              drawH = canvas.height;
+              drawW = Math.round(drawH * srcRatio);
+            }
+            const dx = Math.round((canvas.width - drawW)/2);
+            const dy = Math.round((canvas.height - drawH)/2);
+            ctx.fillStyle = '#0d0d14';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.drawImage(video, 0, 0, w, h, dx, dy, drawW, drawH);
+            video.setAttribute('poster', canvas.toDataURL('image/jpeg', 0.8));
+          }
+        } catch (e) {
+          setPlaceholder();
+        }
+      };
+      const onLoaded = () => {
+        try { video.currentTime = Math.min(0.25, (video.duration || 1) * 0.05); } catch(e) {}
+      };
+      const onSeeked = () => { captureFrame(); cleanup(); };
+      const onError = () => { if (!captured) setPlaceholder(); cleanup(); };
+      video.addEventListener('loadeddata', onLoaded, { once: true });
+      video.addEventListener('seeked', onSeeked, { once: true });
+      video.addEventListener('error', onError, { once: true });
+      setTimeout(() => { if (!captured && !video.getAttribute('poster')) setPlaceholder(); }, 3000);
+    });
+  }
 });
