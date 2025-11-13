@@ -266,7 +266,8 @@ a {
   border-radius: 1.1rem;
   object-fit: cover;
   min-height: 220px;
-  background: var(--color-bg-alt);
+  /* Remove solid background so transparent icon shows through */
+  background: transparent;
   aspect-ratio: 1 / 1; /* square hero */
   width: 100%;
   height: auto;
