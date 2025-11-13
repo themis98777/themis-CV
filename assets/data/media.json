@@ -1,6 +1,30 @@
 [
   {
     "type": "image",
+    "src": "assets/img/530B3D27-809C-4337-9897-00B81ED94D94.jpg",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["selected","tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/B3865738-8D71-4F36-BEDA-0E6179D3A5B2.jpg",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["selected","tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_0763.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["selected","tattoo"]
+  },
+  {
+    "type": "image",
     "src": "assets/img/IMG_0799.JPEG",
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
@@ -9,7 +33,7 @@
   },
   {
     "type": "image",
-    "src": "assets/img/IMG_2429.JPEG",
+    "src": "assets/img/IMG_2430.JPEG",
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
@@ -17,7 +41,15 @@
   },
   {
     "type": "image",
-    "src": "assets/img/IMG_2430.JPEG",
+    "src": "assets/img/IMG_2510.JPEG",
+    "alt": "Tattoo portfolio piece",
+    "title": "Tattoo Work",
+    "caption": "Selected tattoo piece.",
+    "categories": ["selected","tattoo"]
+  },
+  {
+    "type": "image",
+    "src": "assets/img/IMG_2557.JPG",
     "alt": "Tattoo portfolio piece",
     "title": "Tattoo Work",
     "caption": "Selected tattoo piece.",
