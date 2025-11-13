@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeFilter = "all";
   let searchTerm = "";
   let categorySet = new Set();
+  const DEFAULT_VIDEO_POSTER = createDefaultVideoPoster();
 
   /* =============================
      Data Load
@@ -198,9 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageItems = filtered.slice(start, start + perPage);
 
     pageItems.forEach((item) => grid.appendChild(renderCard(item)));
-
-    // After cards are in DOM, ensure videos show a poster frame instead of black
-    ensureVideoPosters(grid);
+    // Lazily hydrate video thumbnails to real frames when in view
+    hydrateVideoThumbnails(grid);
 
     // Add ghost placeholders to keep grid cell sizing consistent when last page not full
     const deficit = perPage - pageItems.length;
@@ -231,24 +231,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const primaryLabel = (item.categories && item.categories[0]) || item.type || "work";
     let mediaHtml = "";
     if (item.type === "video") {
-      const ext = (item.src.split('.').pop() || '').toLowerCase();
-      const mime = ext === 'mov' ? 'video/quicktime' : 'video/mp4';
-      mediaHtml = `<video class="${usingWorkDesign() ? "work-media" : "media-card__thumb"}" controls preload="metadata" playsinline>
-          <source src="${item.src}" type="${mime}" />
-          Your browser does not support the video tag.
-        </video>`;
+      const poster = item.poster || DEFAULT_VIDEO_POSTER;
+      const provided = !!item.poster;
+      mediaHtml = `<img class="${usingWorkDesign() ? "work-media" : "media-card__thumb"}"
+                     src="${poster}"
+                     alt="${item.alt || "Video"}"
+                     loading="lazy"
+                     data-video-src="${item.src}"
+                     data-poster-provided="${provided}" />`;
     } else {
       mediaHtml = `<img class="${usingWorkDesign() ? "work-media" : "media-card__thumb"}" src="${item.src}" alt="${item.alt || ""}" loading="lazy" />`;
     }
 
+    const overlay = item.type === 'video' ? '<span class="play-overlay" aria-hidden="true"></span>' : '';
     if (usingWorkDesign()) {
       card.innerHTML = `
         ${mediaHtml}
+        ${overlay}
       `;
     } else {
       // legacy figure structure without captions
       card.innerHTML = `
         ${mediaHtml}
+        ${overlay}
       `;
     }
 
@@ -299,6 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
       video.controls = true;
       video.playsInline = true;
       video.autoplay = true;
+      video.preload = "metadata";
       const src = document.createElement("source");
       src.src = item.src;
       const ext = (item.src.split('.').pop() || '').toLowerCase();
@@ -331,47 +337,67 @@ document.addEventListener("DOMContentLoaded", () => {
       closeLightbox();
     }
   });
-  // Generate poster images for videos at runtime to avoid black tiles
-  function ensureVideoPosters(scope) {
-    const container = scope || document;
-    const videos = Array.from(container.querySelectorAll('video'));
-    if (!videos.length) return;
-    videos.forEach((video) => {
-      if (video.getAttribute('poster')) return;
-      let captured = false;
-      const cleanup = () => {
-        video.removeEventListener('loadeddata', onLoaded);
-        video.removeEventListener('seeked', onSeeked);
-        video.removeEventListener('error', onError);
-      };
-      const setPlaceholder = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = 400; canvas.height = 500;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.fillStyle = '#0d0d14';
-          ctx.fillRect(0,0,canvas.width,canvas.height);
-          ctx.strokeStyle = 'rgba(214,178,90,0.25)';
-          ctx.lineWidth = 2;
-          ctx.strokeRect(3,3,canvas.width-6,canvas.height-6);
-          ctx.fillStyle = '#d4af37';
-          const size = 90; const cx = canvas.width/2; const cy = canvas.height/2;
-          ctx.beginPath();
-          ctx.moveTo(cx - size/2, cy - size/1.5);
-          ctx.lineTo(cx - size/2, cy + size/1.5);
-          ctx.lineTo(cx + size/1.2, cy);
-          ctx.closePath();
-          ctx.fill();
-          try { video.setAttribute('poster', canvas.toDataURL('image/png')); } catch(e) {}
-        }
-      };
-      const captureFrame = () => {
-        if (captured) return;
-        captured = true;
+  // Create a lightweight default poster for videos to avoid loading video data in the grid
+  function createDefaultVideoPoster() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 400; canvas.height = 500; // 4:5 ratio
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = '#0d0d14';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle = 'rgba(214,178,90,0.25)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(3,3,canvas.width-6,canvas.height-6);
+      ctx.fillStyle = '#d4af37';
+      const size = 90; const cx = canvas.width/2; const cy = canvas.height/2;
+      ctx.beginPath();
+      ctx.moveTo(cx - size/2, cy - size/1.5);
+      ctx.lineTo(cx - size/2, cy + size/1.5);
+      ctx.lineTo(cx + size/1.2, cy);
+      ctx.closePath();
+      ctx.fill();
+    }
+    try { return canvas.toDataURL('image/png'); } catch(e) { return ''; }
+  }
+
+  // Replace placeholder posters with an actual captured frame when tile enters viewport
+  function hydrateVideoThumbnails(scope) {
+    const root = scope || document;
+    const imgs = Array.from(root.querySelectorAll('img[data-video-src]'))
+      .filter(img => img.getAttribute('data-poster-provided') !== 'true' && !img.dataset.thumbHydrated);
+    if (!imgs.length) return;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        io.unobserve(img);
+        captureFrameToImage(img).catch(() => {});
+      });
+    }, { root: null, rootMargin: '200px', threshold: 0.01 });
+
+    imgs.forEach((img) => io.observe(img));
+  }
+
+  async function captureFrameToImage(imgEl) {
+    const src = imgEl.getAttribute('data-video-src');
+    if (!src) return;
+    imgEl.dataset.thumbHydrated = '1';
+    return new Promise((resolve) => {
+      const video = document.createElement('video');
+      video.preload = 'metadata';
+      video.crossOrigin = 'anonymous';
+      video.muted = true;
+      const source = document.createElement('source');
+      source.src = src;
+      const ext = (src.split('.').pop() || '').toLowerCase();
+      source.type = ext === 'mov' ? 'video/quicktime' : 'video/mp4';
+      video.appendChild(source);
+      const toFrame = () => {
         try {
-          const canvas = document.createElement('canvas');
           const w = video.videoWidth || 400;
           const h = video.videoHeight || 500;
+          const canvas = document.createElement('canvas');
           canvas.width = 400; canvas.height = 500;
           const ctx = canvas.getContext('2d');
           if (ctx) {
@@ -385,24 +411,32 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             const dx = Math.round((canvas.width - drawW)/2);
             const dy = Math.round((canvas.height - drawH)/2);
+            // background to fill letterbox
             ctx.fillStyle = '#0d0d14';
             ctx.fillRect(0,0,canvas.width,canvas.height);
             ctx.drawImage(video, 0, 0, w, h, dx, dy, drawW, drawH);
-            video.setAttribute('poster', canvas.toDataURL('image/jpeg', 0.8));
+            imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
           }
-        } catch (e) {
-          setPlaceholder();
-        }
+        } catch(e) {}
+        cleanup(); resolve();
       };
       const onLoaded = () => {
-        try { video.currentTime = Math.min(0.25, (video.duration || 1) * 0.05); } catch(e) {}
+        try { video.currentTime = Math.min(0.25, (video.duration || 1) * 0.05); } catch(e) { /* ignore */ }
       };
-      const onSeeked = () => { captureFrame(); cleanup(); };
-      const onError = () => { if (!captured) setPlaceholder(); cleanup(); };
+      const onSeeked = () => toFrame();
+      const onError = () => { cleanup(); resolve(); };
+      const cleanup = () => {
+        video.removeEventListener('loadeddata', onLoaded);
+        video.removeEventListener('seeked', onSeeked);
+        video.removeEventListener('error', onError);
+      };
       video.addEventListener('loadeddata', onLoaded, { once: true });
       video.addEventListener('seeked', onSeeked, { once: true });
       video.addEventListener('error', onError, { once: true });
-      setTimeout(() => { if (!captured && !video.getAttribute('poster')) setPlaceholder(); }, 3000);
+      // Start loading minimal metadata
+      // Attach to DOM is not necessary for load in most browsers
+      // but we can append hidden if needed for reliability.
+      // document.body.appendChild(video); setTimeout(() => document.body.removeChild(video), 0);
     });
   }
 });

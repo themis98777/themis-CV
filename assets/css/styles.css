@@ -368,6 +368,12 @@ a {
   gap: 0.45rem;
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  position: relative; /* for overlays */
+}
+
+/* Ensure legacy figure-based cards can host overlays too */
+.media-card {
+  position: relative;
 }
 .work-item:hover {
   transform: translateY(-3px);
@@ -425,6 +431,39 @@ a {
   height: auto;
   object-fit: cover;
   border-radius: 0.6rem;
+}
+
+/* Gold play overlay for video tiles */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.play-overlay::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 9999px;
+  background: rgba(5,5,9,0.35);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.35), 0 0 18px rgba(212,175,55,0.25);
+}
+.play-overlay::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid var(--color-gold);
+  filter: drop-shadow(0 2px 8px rgba(212,175,55,0.25));
 }
 
 /* Placeholder cards to keep last row aligned; they occupy space but remain invisible */
