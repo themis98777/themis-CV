@@ -244,15 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (usingWorkDesign()) {
       card.innerHTML = `
         ${mediaHtml}
-        <div class="work-item-label">${primaryLabel.toUpperCase()}</div>
-        ${item.title ? `<div class="work-item-title">${item.title}</div>` : ""}
-        ${item.caption ? `<div class="work-item-caption">${item.caption}</div>` : ""}
       `;
     } else {
-      // legacy figure structure
+      // legacy figure structure without captions
       card.innerHTML = `
         ${mediaHtml}
-        ${item.caption ? `<figcaption class="media-card__caption">${item.caption}</figcaption>` : ""}
       `;
     }
 

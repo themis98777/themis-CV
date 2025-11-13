@@ -122,12 +122,5 @@
     "title": "Tattoo Reel",
     "caption": "Short tattoo reel.",
     "categories": ["selected","videos"]
-  },
-  {
-    "type": "video",
-    "src": "assets/video/copy_22F7D373-693A-4B97-BC1F-53023B90AC96.MOV",
-    "title": "Tattoo Reel (MOV)",
-    "caption": "Short tattoo reel.",
-    "categories": ["selected","videos"]
   }
 ]
